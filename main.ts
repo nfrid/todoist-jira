@@ -54,19 +54,22 @@ async function main() {
 
   logger.info(`Creating tasks (x${count})...`);
 
-  pendingIssues.forEach(({ key, summary, priority, target }) => {
-    logger.info(`> ${key}: ${summary}`);
-    td.quickAddTask({
-      text: `[${key}](${process.env.JIRA_BASE_URL}/browse/${key}): ${summary} #Job @jira today ${priority} ${target ? '@target' : ''}`,
-    })
-      .then(() => {
-        processedTaskKeys.push(key);
-      })
-      .catch((err) => {
-        logger.error(err, 'Failed to create task');
-        count--;
-      });
-  });
+  await Promise.all(
+    pendingIssues.map(async ({ key, summary, priority, target }) => {
+      logger.info(`> ${key}: ${summary}`);
+      await td
+        .quickAddTask({
+          text: `[${key}](${process.env.JIRA_BASE_URL}/browse/${key}): ${summary} #Job @jira today ${priority} ${target ? '@target' : ''}`,
+        })
+        .then(() => {
+          processedTaskKeys.push(key);
+        })
+        .catch((err) => {
+          logger.error(err, 'Failed to create task');
+          count--;
+        });
+    }),
+  );
 
   db.set('processedIssues', processedTaskKeys);
   db.sync();
