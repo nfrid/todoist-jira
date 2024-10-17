@@ -1,0 +1,28 @@
+{
+  "name": "morgen-jira",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.ts",
+  "type": "module",
+  "scripts": {
+    "start": "tsx main.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "22.7.5",
+    "typescript": "5.6.3"
+  },
+  "dependencies": {
+    "@doist/todoist-api-typescript": "3.0.3",
+    "axios": "1.7.7",
+    "dayjs": "1.11.13",
+    "dotenv": "16.4.5",
+    "pino": "9.5.0",
+    "pino-pretty": "11.3.0",
+    "simple-json-db": "2.0.0",
+    "tsx": "4.19.1",
+    "type-fest": "4.26.1"
+  }
+}

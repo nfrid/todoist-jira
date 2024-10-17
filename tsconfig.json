@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "module": "nodenext",
+    "moduleResolution": "bundler",
+    "useDefineForClassFields": true,
+    "baseUrl": "src",
+    "include": [
+      "src/@types/*.d.ts"
+    ],
+  },
+}
